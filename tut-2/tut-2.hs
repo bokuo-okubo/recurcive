@@ -31,3 +31,10 @@ my_soap_iter x = my_soap_iter' x 0
 my_soap_iter' :: Integer -> Integer -> Integer
 my_soap_iter' 0 acc = acc
 my_soap_iter' n acc = my_soap_iter' (n-1) (acc + n)
+
+-- 作るべき関数の型は Integer -> Integer型であるが、末尾再帰にするためには、一つ引数が増えて方が変わる。
+-- 関数を２つ容易することで、この問題を解決している。
+
+-- 増やされた引数は、「蓄積変数」(accumlator)と呼ばれる。
+-- 上記の例ではmy_soap_iter' のaccがそれに当たる。
+-- 蓄積変数に結果を蓄えていき、最後にそれを返す。
