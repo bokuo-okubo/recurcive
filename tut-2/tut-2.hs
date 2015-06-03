@@ -107,3 +107,16 @@ my_minus_iter x y = iter x y x
     iter :: Integer -> Integer -> Integer -> Integer
     iter _ 0 acc = acc
     iter x y acc = iter x (y - 1) (acc - 1)
+
+-- 累乗
+my_power :: Integer -> Integer -> Integer
+my_power _ 0 = 1
+my_power m n = my_power m (n - 1) * m
+
+
+my_power_iter :: Integer -> Integer -> Integer
+my_power_iter x y = iter x y x
+  where
+    iter :: Integer -> Integer -> Integer -> Integer
+    iter _ 0 acc = acc
+    iter x y acc = iter x (y - 1) (acc * x)
