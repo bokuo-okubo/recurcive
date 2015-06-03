@@ -25,12 +25,12 @@
 
 -- ループでできることを実装している再帰関数は、「引数を増やすことで末尾再帰に直せる」
 
-my_soap_iter :: Integer -> Integer
-my_soap_iter x = my_soap_iter' x 0
+-- my_soap_iter :: Integer -> Integer
+-- my_soap_iter x = my_soap_iter' x 0
 
-my_soap_iter' :: Integer -> Integer -> Integer
-my_soap_iter' 0 acc = acc
-my_soap_iter' n acc = my_soap_iter' (n-1) (acc + n)
+-- my_soap_iter' :: Integer -> Integer -> Integer
+-- my_soap_iter' 0 acc = acc
+-- my_soap_iter' n acc = my_soap_iter' (n-1) (acc + n)
 
 -- 作るべき関数の型は Integer -> Integer型であるが、末尾再帰にするためには、一つ引数が増えて方が変わる。
 -- 関数を２つ容易することで、この問題を解決している。
@@ -38,3 +38,40 @@ my_soap_iter' n acc = my_soap_iter' (n-1) (acc + n)
 -- 増やされた引数は、「蓄積変数」(accumlator)と呼ばれる。
 -- 上記の例ではmy_soap_iter' のaccがそれに当たる。
 -- 蓄積変数に結果を蓄えていき、最後にそれを返す。
+
+
+-- トップレベルの関数が増えることを避けるために、末尾先のためのローカル関数を使う。
+-- ローカル関数の名前はiterとする。
+
+my_soap_iter :: Integer -> Integer
+my_soap_iter x = iter x 0
+  where
+    iter :: Integer -> Integer -> Integer
+    iter 0 acc = acc
+    iter n acc = iter (n-1)(acc + n)
+
+-- 変換の様式をまとめよう。
+
+-- - 蓄積変数を１つ増やす
+-- オリジナルの基底部が返す値は、蓄積変数の初期値にする
+-- iter の基底部では蓄積変数を返す
+-- iter の再帰部では蓄積変数に対して仕事をする。
+
+-- 関数型言語を名乗るプログラミング言語であれば、再帰の末尾呼び出しは、単なるジャンプ(goto)に置き換えられるので、
+-- スタックは溢れない。
+
+-- ## 階乗
+-- 階乗を素朴な再帰で実現した
+
+my_fact :: Integer -> Integer
+my_fact 1 = 1
+my_fact n = my_fact (n - 1) * n
+
+-- は、以下のように変形できる。
+
+my_fact_iter :: Integer -> Integer
+my_fact_iter x = iter x 1
+  where
+    iter :: Integer -> Integer -> Integer
+    iter 1 acc = acc
+    iter n acc = iter (n - 1)(acc * n)
