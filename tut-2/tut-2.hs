@@ -75,3 +75,35 @@ my_fact_iter x = iter x 1
     iter :: Integer -> Integer -> Integer
     iter 1 acc = acc
     iter n acc = iter (n - 1)(acc * n)
+
+-------- 掛け算
+
+my_mul :: Integer -> Integer -> Integer
+my_mul m 1 = m
+my_mul m n = my_mul m (n - 1) + m
+
+my_mul_iter :: Integer -> Integer -> Integer
+my_mul_iter x y = iter x y x
+  where
+    iter :: Integer -> Integer -> Integer -> Integer
+    iter _ 1 acc = acc
+    iter m n acc = iter m (n - 1) (acc + m)
+
+-- 演習
+
+
+-- 足し算
+my_plus_iter :: Integer -> Integer -> Integer
+my_plus_iter x y = iter x y x
+  where
+    iter :: Integer -> Integer -> Integer -> Integer
+    iter _ 0 acc = acc
+    iter x y acc = iter x (y - 1) (acc + 1)
+
+-- 引き算
+my_minus_iter :: Integer -> Integer -> Integer
+my_minus_iter x y = iter x y x
+  where
+    iter :: Integer -> Integer -> Integer -> Integer
+    iter _ 0 acc = acc
+    iter x y acc = iter x (y - 1) (acc - 1)
