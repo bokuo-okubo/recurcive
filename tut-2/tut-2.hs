@@ -118,5 +118,5 @@ my_power_iter :: Integer -> Integer -> Integer
 my_power_iter x y = iter x y x
   where
     iter :: Integer -> Integer -> Integer -> Integer
-    iter _ 0 acc = acc
+    iter _ 1 acc = acc
     iter x y acc = iter x (y - 1) (acc * x)
