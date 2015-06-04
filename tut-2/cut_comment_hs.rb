@@ -26,7 +26,7 @@ def cut_comment(file)
       in_comment = false
       next
     end
-    output << line unless (in_comment && line.empty?)
+    output << line unless in_comment
   end
   output
 end

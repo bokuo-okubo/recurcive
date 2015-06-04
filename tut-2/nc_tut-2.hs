@@ -1,22 +1,3 @@
-{-
-
-差が1の等差数列の和を素朴な再帰で実現すると以下のようになった
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 my_soap_iter :: Integer -> Integer
 my_soap_iter x = iter x 0
   where
